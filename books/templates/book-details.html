@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block content %}
+
+<main>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 offset-sm-2">
+<h1>{{book.title}}</h1>
+<h2>By {{book.author}}</h2>
+ <div class="description">{{book.description}}</div>
+ <div class="genre"><strong>Genre:</strong> {{book.genre}}</div>
+ <div class="price"><strong>Price:</strong> £{{book.price}}</div>
+ <div class="excerpt">{{book.excerpt}}</div>
+ <button type="button" class="btn btn-success">Buy full book</button>
+ </div>
+ </div>
+
+     <div class="row">
+    <div class="col-sm-8 offset-2 comment">
+    {% if user.is_authenticated %}
+    <h2>Leave a review/query</h2>
+    <form>
+        <textarea rows="4" cols="50" name="comment"></textarea>
+    </form>
+    {% else %}
+    <p><a href="{% url 'login' %}">Log in to leave a review, comment or query.</a></p>
+    {% endif %}
+ </div>
+ </div>
+ </div>
+
+    </main>
+{% endblock %}

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
 {% block content %}
+<main>
+<div class="container-flex">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 offset-sm-4">
     <form method="post" action="{% url 'login' %}?next={{ next }}" class="accountform">
         <fieldset class="form-group">
             <legend>Login</legend>
@@ -12,4 +16,8 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </fieldset>
     </form>
+    </div>
+    </div>
+    </main>
+    </div>
 {% endblock %}
