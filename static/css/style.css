@@ -54,12 +54,14 @@ main {
 
 .teaser {
     padding-right: 50px;
+    margin-bottom: 50px;
 }
 
 .truncate {
    line-height: 1.5em;
   height: 15em; 
   overflow: hidden;
+  white-space: pre-wrap;
 }
 
 .description, .genre, .price {
@@ -79,11 +81,12 @@ main {
 }
 
 .price{
-    border-left: 8px solid #888;
+    border-left: 8px solid #888
 }
 
 .excerpt {
-    margin-bottom: 20px;
+    margin: 50px 0 20px 0;
+    white-space: pre-wrap;
 }
 
 .comment {

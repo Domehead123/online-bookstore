@@ -9,8 +9,25 @@
  <div class="description">{{book.description}}</div>
  <div class="genre"><strong>Genre:</strong> {{book.genre}}</div>
  <div class="price"><strong>Price:</strong> £{{book.price}}</div>
+
  <div class="excerpt">{{book.excerpt}}</div>
+ 
+ {% if book.username == request.user %}
+
+ <button type="button" class="btn btn-success"><a href="{% url 'edit_book' book.id %}">Edit book</a></button>
+ 
+ {% else %}
+  
  <button type="button" class="btn btn-success">Buy full book</button>
+ 
+ {% endif %}
+
+ 
+
+
+
+
+ 
  </div>
  </div>
 

@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from accounts import urls as urls_accounts
-from books.views import all_books, book_details
+from books.views import all_books, book_details, edit_book, add_book
 from django.views import static
 
 urlpatterns = [
@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^$', all_books, name='books'),
     url(r'^(?P<pk>\d+)/$', book_details, name='book_details'),
     url(r'^accounts/', include(urls_accounts)),
-    
+    url(r'^add-book/$', add_book, name='add_book'),
+    url(r'^(?P<pk>\d+)/edit/$',edit_book, name='edit_book')
 ]
+
