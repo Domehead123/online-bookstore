@@ -8,3 +8,6 @@ urlpatterns = [
     url(r'^add-book/$', add_book, name='add_book'),
     url(r'^(?P<pk>\d+)/edit/$',edit_book, name='edit_book')
 ]
+
+
+ 

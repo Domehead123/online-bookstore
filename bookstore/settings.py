@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'django_forms_bootstrap',
     'accounts',
     'books',
+    'checkout',
+    'cart'
 ]
 
 MIDDLEWARE = [
@@ -65,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.contexts.cart_contents'
             ],
         },
     },
@@ -129,5 +133,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     )
+    
+STRIPE_PUBLISHABLE=os.getenv('STRIPE_PUBLISHABLE')
+STRIPE_SECRET=os.getenv('STRIPE_SECRET')
 
 # MESSAGE_STORAGE ='django.contrib.messages.storage.sessions.SessionStorage'

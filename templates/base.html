@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Serif|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      {% block head_js %}
+    {% endblock head_js %}
  
     
     
@@ -45,6 +47,14 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-in"></i> Log Out</a>
         </li>
+         <li class="nav-item">
+        <a class="nav-link" href="{% url 'view_cart' %}">
+                            <i class="fa fa-shipping-cart"></i> Cart
+                            {% if book_count > 0 %}
+                            {{ book_count }}
+                            {% endif %}
+                        </a>
+        </li>
         {% else %}
        <li class="nav-item">
         <a class="nav-link" href="{% url 'register' %}"><i class="fa fa-user-plus"></i> Register</a>
@@ -52,17 +62,19 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Log In</a>
         </li>
+       
         {% endif %}
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+    
+  
   </div>
 </nav>
 <header>
-    <div class="logo">Fully booked</div>
-   
+  
     <div class="subhead">Books with all profits going to charity</div>
     </header>
 
@@ -70,3 +82,5 @@
 
 </body>
 </html>
+
+  
