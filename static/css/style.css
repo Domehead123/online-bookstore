@@ -4,6 +4,14 @@ body {
     font-family: 'PT Serif', serif;
 }
 
+.btn {
+    margin-right: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
 a {
 color: #00FFFF
 }

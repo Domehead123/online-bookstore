@@ -29,8 +29,12 @@ def edit_book(request, pk):
         form = AddBookForm(instance=book)
     return render(request, 'add-book.html', {'form': form})
     
+@login_required    
+def delete_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    book.delete()
+    return redirect(all_books)
   
-
 @login_required    
 def add_book(request, pk=None):
     book = None
