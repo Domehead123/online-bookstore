@@ -3,31 +3,32 @@
 {% load bootstrap_tags %}
 
 {% block content %}
-<div class="row row-flex">
+<div class="container-flex">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 offset-sm-3">
+        
+    <h1>Your cart</h1>
     {% for item in cart_items %}
-    
-    <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-display">
-        
-        
         <div class="caption">
             <h3>{{ item.book.title }}</h3>
-            <p class="product-description">{{ item.book.author }}</p>
-            <p>{{ item.book.price }}</p>
+            <p>By {{ item.book.author }}</p>
+            <p>Cost: £{{ item.book.price }}</p>
             <p>
                 
-                <form class="form-inline" method="post" action="{% url 'remove_from_cart' item.id %}">
+                <form class="form-inline" method="post" action="{% url 'remove_from_cart' item.id %}" class="accountform">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-primary">Remove</button>
                 </form>
             </p>
-        </div>
+        
     </div>
     {% endfor %}
+
+
+    <p>Total: <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>£ {{ total }}</p>
+    <a href="{% url 'checkout' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Proceed to checkout</a>
 </div>
-<div class="row">
-    <p>Total</p>
-    <p><span class="glyphicon glyphicon-euro" aria-hidden="true"></span>{{ total }}</p>
-    <a href="{% url 'checkout' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Checkout</a>
+</div>
 </div>
 
 {% endblock %}

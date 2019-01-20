@@ -20,7 +20,9 @@ from search import urls as urls_search
 from checkout import urls as urls_checkout
 from cart import urls as urls_cart
 from books import urls as urls_book
+from downloads import urls as urls_downloads
 from books.views import all_books, book_details, edit_book, add_book, delete_book
+
 from django.views import static
 
 urlpatterns = [
@@ -29,10 +31,12 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/$', book_details, name='book_details'),
     url(r'^accounts/', include(urls_accounts)),
     url(r'^checkout/', include(urls_checkout)),
+    url(r'^downloads/', include(urls_downloads)),
     url(r'^cart/', include(urls_cart)),
     url(r'^add-book/$', add_book, name='add_book'),
     url(r'^(?P<pk>\d+)/edit/$',edit_book, name='edit_book'),
     url(r'^search/', include(urls_search)),
-    url(r'^(?P<pk>\d+)/delete/$',delete_book, name='delete_book')
+    url(r'^(?P<pk>\d+)/delete/$',delete_book, name='delete_book'),
+   
 ]
 

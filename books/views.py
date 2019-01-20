@@ -10,8 +10,6 @@ from django.contrib.auth.decorators import login_required
 def all_books(request):
     books = Book.objects.all()
     return render(request, "books.html", {"books": books})
-    
-
 
 def book_details(request, pk):
     book = get_object_or_404(Book,pk=pk)

@@ -16,7 +16,7 @@ def logout(request):
     """A view that logs the user out and redirects back to the index page"""
     auth.logout(request)
     messages.success(request, 'You have successfully logged out')
-    return redirect(reverse('books'))
+    return redirect(reverse('all_books'))
 
 
 def login(request):
@@ -64,7 +64,7 @@ def register(request):
             if user:
                 auth.login(request, user)
                 messages.success(request, "You have successfully registered")
-                return redirect(reverse('books'))
+                return redirect(reverse('all_books'))
 
             else:
                 messages.error(request, "unable to log you in at this time!")

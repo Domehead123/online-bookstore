@@ -6,6 +6,7 @@ from .models import OrderLineItem
 from django.conf import settings
 from django.utils import timezone
 from books.models import Book
+from downloads.models import Downloadable
 import stripe
 
 
@@ -28,7 +29,7 @@ def checkout(request):
             total = 0
             for id, quantity in cart.items():
                 book = get_object_or_404(Book, pk=id)
-                total += quantity * book.price
+                total += book.price
                 order_line_item = OrderLineItem(
                     order = order, 
                     book = book, 
@@ -48,8 +49,12 @@ def checkout(request):
                 
             if customer.paid:
                 messages.error(request, "You have successfully paid")
+                for id, quantity in cart.items():
+                    book = get_object_or_404(Book, pk=id)
+                    downloadable_book = Downloadable(username=request.user, downloadbook=book)
+                    downloadable_book.save()
                 request.session['cart'] = {}
-                return redirect(reverse('all_books'))
+                return redirect(reverse('view_downloads'))
             else:
                 messages.error(request, "Unable to take payment")
         else:
