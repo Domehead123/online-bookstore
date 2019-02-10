@@ -1,5 +1,9 @@
-
+$( document ).ready(function() {
     
-    var downloadMessage = $("#download-message");
-    console.log(downloadMessage);
+    var firsth2 = $("h2").text();
     
+    if (firsth2=="") {
+        $("#download-message").text("You don't have any downloads yet.");
+    }
+    
+});

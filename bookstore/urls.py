@@ -22,6 +22,7 @@ from cart import urls as urls_cart
 from books import urls as urls_book
 from downloads import urls as urls_downloads
 from books.views import all_books, book_details, edit_book, add_book, delete_book
+from comments.views import add_comment
 
 from django.views import static
 
@@ -37,6 +38,7 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/edit/$',edit_book, name='edit_book'),
     url(r'^search/', include(urls_search)),
     url(r'^(?P<pk>\d+)/delete/$',delete_book, name='delete_book'),
+    url(r'^(?P<pk>\d+)/comment/$',add_comment, name='add_comment')
    
 ]
 

@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% load static from staticfiles %}
-
+{% load bootstrap_tags %} 
 
 {% block content %}
 
@@ -36,8 +36,6 @@
             </form>
  
  
- 
- 
  {% endif %}
 
  
@@ -48,12 +46,18 @@
     <div class="col-sm-8 offset-2 comment">
     {% if user.is_authenticated %}
     <h2>Leave a review/query</h2>
-    <form>
-        <textarea rows="4" cols="50" name="comment"></textarea>
-    </form>
+    <a href="{% url 'add_comment' book.id %}?next={{ request.path|urlencode }}">Add comment</a>
+    
+    
     {% else %}
     <p><a href="{% url 'login' %}">Log in to leave a review, comment or query.</a></p>
     {% endif %}
+    {% for instance in comments %}
+    {% if instance.book.title == book.title %}
+    <p>{{ instance.comment }}</p>
+    <p>{{ instance.username }}</p>
+    {% endif %}
+    {% endfor %}
  </div>
  </div>
  </div>

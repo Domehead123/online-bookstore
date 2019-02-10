@@ -4,7 +4,7 @@ from .forms import AddBookForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from comments.models import Comment
-from comments.forms import AddCommentForm
+from comments.forms import Comment
 
 
 
@@ -17,8 +17,7 @@ def all_books(request):
 
 def book_details(request, pk):
     book = get_object_or_404(Book,pk=pk)
-    comments = Comment.objects.all()
-    return render(request, "book-details.html", {'book': book, 'comments': comments})
+    return render(request, "book-details.html", {'book': book})
 
 @login_required    
 def edit_book(request, pk):
@@ -30,7 +29,7 @@ def edit_book(request, pk):
             return redirect(all_books)
     else:
         form = AddBookForm(instance=book)
-        return render(request, 'add-book.html', {'form': form})
+    return render(request, 'add-book.html', {'form': form})
     
 @login_required    
 def delete_book(request, pk):
@@ -50,5 +49,18 @@ def add_book(request, pk=None):
             return redirect(all_books)
     else:
         form = AddBookForm(instance=book)
-        return render(request, 'add-book.html', {'form': form})
+    return render(request, 'add-book.html', {'form': form})
     
+@login_required    
+def add_comment(request, pk):
+    comment = None
+    if request.method == "POST":
+        form = AddCommentForm(request.POST, request.FILES, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.username = request.user
+            comment.save()
+            return redirect(all_books)
+    else:
+        form = AddCommentForm(instance=comment)
+    return render(request, 'add-comment.html', {'form': form})

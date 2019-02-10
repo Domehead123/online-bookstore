@@ -3,10 +3,11 @@
 <div class="container-flex">
   <div class="row">
     <div class="col-xs-12 col-sm-6 offset-sm-3">
- <h1>Add your book using the form below</h1>
+ <h1>Add your comment using the form below</h1>
     <form method="POST" enctype="multipart/form-data" class="accountform">
         {% csrf_token %}
         {{ form | as_bootstrap }}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
         <button type="submit" class="btn btn-info">Save</button>
     </form>
   
