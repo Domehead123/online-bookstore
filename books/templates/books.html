@@ -1,24 +1,13 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load static from staticfiles %}{% block content %}
 
 
 <main>
     <div class="genre-selector">
-<form>
-    
-     
-   <label for="sort-by">SORT BY:</label>
-    <select name="sort-by">
-      <option value="newest">Newest first</option>
-        <option value="oldest">Oldest first</option>
-        <option value="most-purchased">Most purchased</option>
-        <option value="least-purchased">Least purchased</option>
-    </select>
-    </form>
-&nbsp;
-    <form></form>
-   <label for="genre">GENRE:</label>
+
+    <form>
+   <label form="genre">SORT BY GENRE:</label>
    
-    <select name="genre">
+    <select name="genre" class="genreselect">
       <option value="All">All</option>
         <option value="Historical">Historical</option>
         <option value="Horror">Horror</option>
@@ -33,7 +22,7 @@
 <div class="container-flex">
   <div class="row">
       {% for book in books %}
-    <div class="col-xs-12 col-sm-4 teaser">
+    <div class="col-xs-12 col-sm-4 teaser {{book.genre}}">
       <h2>{{book.title}}</h2>
       <h3>by {{book.author}}</h3>
       <div class="description">{{book.description}}</div>
@@ -49,4 +38,7 @@
   </div>
 </div>
     </main>
+{% endblock %}
+{% block bottom_js %}
+<script type="text/javascript" src="{% static 'js/genre.js' %}"></script>
 {% endblock %}
