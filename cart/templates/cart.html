@@ -1,34 +1,28 @@
-{% extends 'base.html' %}
-{% load static from staticfiles %}
-{% load bootstrap_tags %}
+{% extends 'base.html' %} {% load static from staticfiles %} {% load bootstrap_tags %} {% block content %}
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 offset-sm-3">
+                <h1>Your cart</h1>
+                {% for item in cart_items %}
+                <div class="comment">
+                    <h3>{{ item.book.title }}</h3>
+                    <p>By {{ item.book.author }}</p>
+                    <p>Cost: £{{ item.book.price }}</p>
+                    <p>
+                        <form class="form-inline" method="post" action="{% url 'remove_from_cart' item.id %}" class="accountform">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Remove</button>
+                        </form>
+                    </p>
 
-{% block content %}
-<div class="container-flex">
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 offset-sm-3">
-        
-    <h1>Your cart</h1>
-    {% for item in cart_items %}
-        <div class="caption">
-            <h3>{{ item.book.title }}</h3>
-            <p>By {{ item.book.author }}</p>
-            <p>Cost: £{{ item.book.price }}</p>
-            <p>
-                
-                <form class="form-inline" method="post" action="{% url 'remove_from_cart' item.id %}" class="accountform">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Remove</button>
-                </form>
-            </p>
-        
+                </div>
+                {% endfor %}
+                <p>Total: <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>£ {{ total }}</p>
+                <a href="{% url 'checkout' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Proceed to checkout</a>
+            </div>
+        </div>
     </div>
-    {% endfor %}
-
-
-    <p>Total: <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>£ {{ total }}</p>
-    <a href="{% url 'checkout' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Proceed to checkout</a>
-</div>
-</div>
-</div>
+</main>
 
 {% endblock %}

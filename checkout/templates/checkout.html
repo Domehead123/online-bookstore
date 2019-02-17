@@ -11,42 +11,29 @@
     <div class="container-flex">
         <div class="row">
             <div class="col-xs-12 col-sm-6 offset-sm-3">
-                
                 {% for item in cart_items %}
                 <p>You are purchasing...</p>
                 <div class="caption">
                     <h3>{{ item.book.title }}</h3>
-                    <p class="product-description">By {{ item.book.author }}<br />
-                    Cost: £{{ item.book.price }}</p>
+                    <p class="product-description">By {{ item.book.author }}<br /> Cost: £{{ item.book.price }}</p>
                 </div>
-                
-         
-        {% endfor %}
-    
-        <p> Total: £<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>{{ total }}</p>
-    </div>
-    </div>
-     <div class="row">
-        <div class="col-xs-12 col-sm-6 offset-sm-3">
-    <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}" class="accountform">
-        <legend>Payment Details</legend>
-        <div id="credit-card-errors" style="display:none">
-            <div id="stripe-error-message" style="color:red"></div>
+                {% endfor %}
+                <p> Total: £<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>{{ total }}</p>
+            </div>
         </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 offset-sm-3">
+                <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}" class="accountform">
+                    <legend>Payment Details</legend>
+                    <div id="credit-card-errors" style="display:none">
+                        <div id="stripe-error-message" style="color:red"></div>
+                    </div>
+                    {{ order_form|as_bootstrap }} {{ payment_form|as_bootstrap }} {% csrf_token %}
+                    <input class="btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
 
-       
-            {{ order_form|as_bootstrap }}
-        
-            {{ payment_form|as_bootstrap }}
-        
-
-        {% csrf_token %}
-       
-            <input class="btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
-        
-    </form>
-    </div>
-    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </main>
 {% endblock %}

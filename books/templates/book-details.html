@@ -27,15 +27,18 @@
  </div>
  
  {% else %}
-  
+  {% if user.is_authenticated %}
   <form method="post" action="{% url 'add_to_cart' book.id %}">
                 {% csrf_token %}
                             <button class="btn btn-success" type="submit">Buy full book</button>
                 </div>
 
             </form>
+      {% else %}  
+      <button class="btn btn-success"><a href="{% url 'login' %}">Log in to buy book</a></button>
  
- 
+  {% endif %}
+  
  {% endif %}
 
  
@@ -43,19 +46,22 @@
  </div>
 
      <div class="row">
-    <div class="col-sm-8 offset-2 comment">
+    <div class="col-sm-8 offset-2 comment-list">
     {% if user.is_authenticated %}
-    <h2>Leave a review/query</h2>
-    <a href="{% url 'add_comment' book.id %}?next={{ request.path|urlencode }}">Add comment</a>
+    <h2>Comments</h2>
+    <button class="btn btn-success"><a href="{% url 'add_comment' book.id %}?next={{ request.path|urlencode }}">Add comment</a></button>
     
     
     {% else %}
-    <p><a href="{% url 'login' %}">Log in to leave a review, comment or query.</a></p>
+    <button class="btn btn-success"><a href="{% url 'login' %}">Log in to leave a review, comment or query</a></button>
     {% endif %}
     {% for instance in comments %}
     {% if instance.book.title == book.title %}
+    <div class="comment">
     <p>{{ instance.comment }}</p>
-    <p>{{ instance.username }}</p>
+    <p><strong>{{ instance.username }}</strong></p>
+    <hr></hr>
+    </div>
     {% endif %}
     {% endfor %}
  </div>
