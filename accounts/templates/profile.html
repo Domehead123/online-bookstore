@@ -1,13 +1,12 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <main>
-<div class="container-flex">
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 offset-sm-3">
-    <h2>Success!</h2>
-    <p>You are logged in as {{ user.email }} </p>
-</div>
-</div>
-<div>
+    <div class="container-flex">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 offset-sm-3">
+                <h2>Success!</h2>
+                <p>You are logged in as {{ user.email }} </p>
+            </div>
+        </div>
+        <div>
 </main>
 {% endblock %}

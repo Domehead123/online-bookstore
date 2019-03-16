@@ -1,75 +1,58 @@
-{% extends 'base.html' %} 
-{% load static from staticfiles %}
-{% load bootstrap_tags %} 
-
-{% block content %}
+{% extends 'base.html' %} {% load static from staticfiles %} {% load bootstrap_tags %} {% block content %}
 
 <main>
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-8 offset-sm-2">
-<h1>{{book.title}}</h1>
-<h2>By {{book.author}}</h2>
- <div class="description">{{book.description}}</div>
- <div class="genre"><strong>Genre:</strong> {{book.genre}}</div>
- <div class="price"><strong>Price:</strong> £{{book.price}}</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 offset-sm-2">
+                <h1>{{book.title}}</h1>
+                <h2>By {{book.author}}</h2>
+                <div class="description">{{book.description}}</div>
+                <div class="genre"><strong>Genre:</strong> {{book.genre}}</div>
+                <div class="price"><strong>Price:</strong> £{{book.price}}</div>
 
- <div class="excerpt">{{book.excerpt}}</div>
- 
- {% if book.username == request.user %}
+                <div class="excerpt">{{book.excerpt}}</div>
 
- <button type="button" class="btn btn-success"><a href="{% url 'edit_book' book.id %}">Edit book</a></button>
- <button type="button" class="btn btn-danger" id="delete">Delete book</button>
- <div id="delete-check" class="hidden">
-     <br/>
- <p>Do you really want to delete this book?</p>
- <p><button type="button" class="btn btn-danger"><a href="{% url "delete_book" book.id %}">Yes</a></button><button type="button" class="btn btn-success" id="no-delete">No</button></p>
- </div>
- 
- {% else %}
-  {% if user.is_authenticated %}
-  <form method="post" action="{% url 'add_to_cart' book.id %}">
-                {% csrf_token %}
-                            <button class="btn btn-success" type="submit">Buy full book</button>
+                {% if book.username == request.user %}
+
+                <button type="button" class="btn btn-success"><a href="{% url 'edit_book' book.id %}">Edit book</a></button>
+                <button type="button" class="btn btn-danger" id="delete">Delete book</button>
+                <div id="delete-check" class="hidden">
+                    <br/>
+                    <p>Do you really want to delete this book?</p>
+                    <p><button type="button" class="btn btn-danger"><a href="{% url "delete_book" book.id %}">Yes</a></button><button type="button" class="btn btn-success" id="no-delete">No</button></p>
                 </div>
 
+                {% else %} {% if user.is_authenticated %}
+                <form method="post" action="{% url 'add_to_cart' book.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-success" type="submit">Buy full book</button>
+            </div>
+
             </form>
-      {% else %}  
-      <button class="btn btn-success"><a href="{% url 'login' %}">Log in to buy book</a></button>
- 
-  {% endif %}
-  
- {% endif %}
+            {% else %}
+            <button class="btn btn-success"><a href="{% url 'login' %}">Log in to buy book</a></button> {% endif %} {% endif %}
 
- 
- </div>
- </div>
 
-     <div class="row">
-    <div class="col-sm-8 offset-2 comment-list">
-    {% if user.is_authenticated %}
-    <h2>Comments</h2>
-    <button class="btn btn-success"><a href="{% url 'add_comment' book.id %}?next={{ request.path|urlencode }}">Add comment</a></button>
-    
-    
-    {% else %}
-    <button class="btn btn-success"><a href="{% url 'login' %}">Log in to leave a review, comment or query</a></button>
-    {% endif %}
-    {% for instance in comments %}
-    {% if instance.book.title == book.title %}
-    <div class="comment">
-    <p>{{ instance.comment }}</p>
-    <p><strong>{{ instance.username }}</strong></p>
-    <hr></hr>
+        </div>
     </div>
-    {% endif %}
-    {% endfor %}
- </div>
- </div>
- </div>
 
-    </main>
-{% endblock %}
-{% block bottom_js %}
+    <div class="row">
+        <div class="col-sm-8 offset-2 comment-list">
+            {% if user.is_authenticated %}
+            <h2>Comments</h2>
+            <button class="btn btn-success"><a href="{% url 'add_comment' book.id %}?next={{ request.path|urlencode }}">Add comment</a></button> {% else %}
+            <button class="btn btn-success"><a href="{% url 'login' %}">Log in to leave a review, comment or query</a></button> {% endif %} {% for instance in comments %} {% if instance.book.title == book.title %}
+            <div class="comment">
+                <p>{{ instance.comment }}</p>
+                <p><strong>{{ instance.username }}</strong></p>
+                <hr></hr>
+            </div>
+            {% endif %} {% endfor %}
+        </div>
+    </div>
+    </div>
+
+</main>
+{% endblock %} {% block bottom_js %}
 <script type="text/javascript" src="{% static 'js/delete.js' %}"></script>
 {% endblock %}

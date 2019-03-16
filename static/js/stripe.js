@@ -1,3 +1,5 @@
+// This is the standard Stripe payment code. I didn't write it
+
 $(function() {
     $("#payment-form").submit(function() {
         var form = this;

@@ -1,9 +1,9 @@
 $(document).ready(function(){
     var selectedGenre = "None";
     $("select.genreselect").change(function(){
+        
         $(".teaser").removeClass("hidden");
    
-        
         selectedGenre = $(this).children("option:selected").val();
         
         
@@ -14,11 +14,6 @@ $(document).ready(function(){
         
                $(".teaser").addClass("hidden");
                $("." + selectedGenre).removeClass("hidden");
-          
-         
-         
-     }
+        }
     });
-  
-   
  });

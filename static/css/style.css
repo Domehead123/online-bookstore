@@ -86,8 +86,8 @@ main {
 }
 
 .truncate {
-   line-height: 1.5em;
-  height: 15em; 
+  line-height: 1.5em;
+  height: 9em; 
   overflow: hidden;
   white-space: pre-wrap;
 }
