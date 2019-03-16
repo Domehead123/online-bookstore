@@ -1,0 +1,1 @@
+web: gunicorn online-book-store.wsgi:application
