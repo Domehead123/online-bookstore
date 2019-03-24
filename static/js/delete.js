@@ -1,4 +1,7 @@
-document.getElementById("delete").addEventListener("click", deleteWarning);
+var el = document.getElementById("delete");
+
+if(el){
+  el.addEventListener("click", deleteWarning);
 
 document.getElementById("no-delete").addEventListener("click", hideDeleteWarning);
 
@@ -8,5 +11,7 @@ function deleteWarning() {
 
 function hideDeleteWarning() {
   document.getElementById("delete-check").classList.add("hidden");
+}
+
 }
 
