@@ -3,7 +3,6 @@ from books.models import Book
 
 
 def cart_contents(request):
-   
 
         cart = request.session.get('cart', {})
     

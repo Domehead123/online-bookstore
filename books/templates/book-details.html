@@ -9,11 +9,8 @@
                 <div class="description">{{book.description}}</div>
                 <div class="genre"><strong>Genre:</strong> {{book.genre}}</div>
                 <div class="price"><strong>Price:</strong> £{{book.price}}</div>
-
                 <div class="excerpt">{{book.excerpt}}</div>
-
                 {% if book.username == request.user %}
-
                 <button type="button" class="btn btn-success"><a href="{% url 'edit_book' book.id %}">Edit book</a></button>
                 <button type="button" class="btn btn-danger" id="delete">Delete book</button>
                 <div id="delete-check" class="hidden">
@@ -26,13 +23,17 @@
                 <form method="post" action="{% url 'add_to_cart' book.id %}">
                     {% csrf_token %}
                     <button class="btn btn-success" type="submit">Buy full book</button>
+                    {% if book_count > 0 %}
+                    <br>
+                    <br>
+                    <p> You have {{ book_count }} items in your cart</p>
+                            {% endif %}
             </div>
-
             </form>
             {% else %}
             <button class="btn btn-success"><a href="{% url 'login' %}">Log in to buy book</a></button> {% endif %} {% endif %}
-
-
+            
+           
         </div>
     </div>
 

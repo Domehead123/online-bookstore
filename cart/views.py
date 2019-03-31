@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, reverse
+from django.contrib import messages
+
 
 
 # Create your views here.
@@ -12,8 +14,8 @@ def add_to_cart(request, id):
     cart = request.session.get('cart', {})
     cart[id] = 1
     request.session['cart'] = cart
-    return redirect(reverse('all_books'))
-    
+    messages.add_message(request, messages.INFO, 'Hello world.')
+    return redirect(request.META['HTTP_REFERER'])
     
 def remove_from_cart(request, id):
     cart = request.session.get('cart', {})

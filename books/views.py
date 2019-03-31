@@ -7,8 +7,6 @@ from comments.models import Comment
 from comments.forms import AddCommentForm
 
 
-
-
 # Create your views here.
 
 def all_books(request):
@@ -52,3 +50,4 @@ def add_book(request, pk=None):
         form = AddBookForm(instance=book)
         return render(request, 'add-book.html', {'form': form})
     
+
