@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-
+# -*- coding: utf-8 -*-
 
 # Create your models here.
 
