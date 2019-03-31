@@ -37,7 +37,7 @@ class Book(models.Model):
     )
     description = models.TextField(verbose_name="Brief description of novel (500 characters max) *", max_length=500)
     excerpt = models.TextField(verbose_name="Opening chapter/s *")
-    price = models.DecimalField(verbose_name="Price £ *", max_digits=6, decimal_places=2)
+    price = models.DecimalField(verbose_name="Price (sterling) *", max_digits=6, decimal_places=2)
     file = models.FileField(verbose_name="Upload book document *")
     username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
